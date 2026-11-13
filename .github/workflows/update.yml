@@ -1,0 +1,47 @@
+name: maj-produits
+
+on:
+  schedule:
+    - cron: "17 * * * *"   # toutes les heures (à la 17e minute, moins chargée que :00)
+  workflow_dispatch:         # bouton "Run workflow" pour lancer à la demande
+
+permissions:
+  contents: write
+
+concurrency:
+  group: maj-produits
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Installer les dépendances
+        run: pip install -r requirements.txt
+
+      - name: Récupérer les produits CJ (chiffrés avec les identifiants du site)
+        run: python -u fetch.py
+        env:
+          CJ_API_KEY: ${{ secrets.CJ_API_KEY }}
+          SITE_LOGIN: ${{ secrets.SITE_LOGIN }}
+          SITE_PASSWORD: ${{ secrets.SITE_PASSWORD }}
+
+      - name: Enregistrer docs/data.json s'il a changé
+        run: |
+          if git diff --quiet -- docs/data.json && [ -z "$(git ls-files --others -- docs/data.json)" ]; then
+            echo "Aucun changement, pas de commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/data.json
+          git commit -m "maj données CJ"
+          git pull --rebase
+          git push

@@ -1,0 +1,48 @@
+{
+  "_aide": "Fichier de réglages. Modifie librement les valeurs. Les clés qui commencent par _ sont des explications, elles sont ignorées.",
+
+  "_aide_recherches": "Une ligne par recherche. 'categorie' = le nom affiché sur le site. 'mot_cle' = recherche en ANGLAIS dans le catalogue CJ. 'categoryId' (facultatif) = identifiant de catégorie CJ (lance 'python fetch.py --categories' pour la liste). Tu peux mettre mot_cle, categoryId, ou les deux.",
+  "recherches": [
+    {"categorie": "Cuisine", "mot_cle": "kitchen gadget"},
+    {"categorie": "Maison", "mot_cle": "storage organizer"},
+    {"categorie": "Sport & Plein air", "mot_cle": "camping lamp"},
+    {"categorie": "Sport & Plein air", "mot_cle": "yoga mat"},
+    {"categorie": "Beauté", "mot_cle": "facial cleansing brush"},
+    {"categorie": "Informatique", "mot_cle": "wireless charger"},
+    {"categorie": "Auto", "mot_cle": "car phone holder"},
+    {"categorie": "Animaux", "mot_cle": "pet grooming"},
+    {"categorie": "Jouets", "mot_cle": "educational toys"},
+    {"categorie": "Jouets", "mot_cle": "plush toy"}
+  ],
+
+  "_aide_produits_par_recherche": "Nombre de produits demandés à CJ par recherche (1 à 100).",
+  "produits_par_recherche": 20,
+
+  "_aide_tri_cj": "Ordre dans lequel CJ renvoie les produits : 0 = pertinence, 1 = les plus listés (populaires), 2 = prix, 3 = nouveautés.",
+  "tri_cj": 1,
+
+  "_aide_pays_stock": "Code pays (ex. FR, DE, US, CN) pour ne garder que les produits en stock dans un entrepôt de ce pays. Laisse vide pour tout voir.",
+  "pays_stock": "",
+
+  "_aide_prix_usd": "Fourchette de prix fournisseur en dollars (CJ travaille en USD). Laisse null pour ne pas filtrer.",
+  "prix_min_usd": null,
+  "prix_max_usd": 30,
+
+  "_aide_details": "Si actif, récupère pour chaque produit la note, le nombre d'avis, le nombre de commandes et la sous-catégorie (1 appel par produit, gratuit en points mais limité à 1 par seconde). Les détails sont réutilisés pendant 'rafraichir_apres_heures'.",
+  "details": {"actif": true, "max_par_execution": 200, "rafraichir_apres_heures": 24},
+
+  "_aide_livraison": "Calcule pour chaque produit le délai et le prix de livraison (1 unité) du pays 'depart' vers le pays 'pays', avec le mode le moins cher et, s'il existe, un mode plus rapide. Coûte 10 points par produit ; le résultat est gardé 'rafraichir_apres_heures'.",
+  "livraison": {"actif": true, "pays": "FR", "depart": "CN", "max_par_execution": 250, "rafraichir_apres_heures": 24},
+
+  "_aide_budget": "CJ donne 50 000 points par jour (compte gratuit). Une recherche coûte 50 points, un calcul de livraison 10 points. Ce budget arrête l'exécution avant de trop consommer (24 exécutions par jour).",
+  "budget_points_par_execution": 2500,
+
+  "_aide_poids_score": "Poids du score qualité/prix (0 à 100). Ils n'ont pas besoin de faire 1 au total.",
+  "poids_score": {"prix": 0.5, "ventes": 0.3, "note": 0.2},
+
+  "_aide_protection": "Si true, les vrais produits ne sont publiés que chiffrés avec l'identifiant et le mot de passe du site (secrets SITE_LOGIN et SITE_PASSWORD). Sans eux, rien n'est publié.",
+  "protection": true,
+
+  "_aide_lien_produit": "Modèle du lien vers la fiche produit CJ. {id} est remplacé par l'identifiant du produit. Vérifie-le en ouvrant un produit sur cjdropshipping.com (voir README).",
+  "lien_produit": "https://cjdropshipping.com/product/-p-{id}.html"
+}

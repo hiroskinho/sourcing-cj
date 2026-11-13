@@ -1,0 +1,11 @@
+# Prix Amazon.fr saisis à la main (facultatif).
+# id_cj = identifiant du produit CJ (affiché sur chaque carte du site, bouton "Copier l'ID")
+# prix_amazon = prix de vente TTC constaté sur Amazon.fr, en euros, avec un POINT (ex. 19.99)
+# asin = facultatif, pour ajouter un lien "Voir sur Amazon"
+# Les lignes DEMO-... ne servent qu'au mode démo : remplace-les par tes produits.
+id_cj,prix_amazon,asin
+DEMO-0000,19.99,
+DEMO-0101,24.90,
+DEMO-0203,29.99,
+DEMO-0402,34.90,
+DEMO-0500,22.50,
